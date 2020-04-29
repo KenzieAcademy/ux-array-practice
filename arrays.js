@@ -19,7 +19,11 @@
 
 function fridgeContains(fridge, item) {
     // Your code here.  Check if the item is in the fridge, return true or false.
-    return false;
+    if (fridge.includes(item)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /* 
@@ -47,6 +51,9 @@ console.log(!fridgeContains(fridge, "eggplant"));
 
 function putItemIntoFridge(fridge, item) {
     // Your code here.
+    if (!fridge.includes(item)) {
+        fridge.push(item);
+    }
 }
 
 /* 
@@ -78,7 +85,16 @@ console.log(fridge2.length == previousLength + 1 && fridge2.includes("kale"));
 
 function getItemFromFridge(fridge, item) {
     // Your code here.
+
+    if (fridge.includes(item)) {
+        let selectedItem = fridge.indexOf(item);
+        let removeItem = fridge.splice(selectedItem, 1);
+        return removeItem;
+    } else {
+        return null;
+    }
 }
+
 
 /* 
    -------TESTS---------------------------------------------------------------
@@ -86,7 +102,7 @@ function getItemFromFridge(fridge, item) {
 */
 console.log("-----Tests for Exercise Three-----");
 let fridge3 = ["milk", "cheese", "eggs", "broccoli", "spinach", "chicken", "leftovers"];
-console.log("* Get the cheese");
+console.log("* Get the milk");
 let lengthBeforeGettingMilk = fridge3.length;
 let milk = getItemFromFridge(fridge3, "milk")
 console.log(milk == "milk" && fridge3.length == lengthBeforeGettingMilk - 1 && !fridge3.includes("milk"));
@@ -170,6 +186,23 @@ function getIndexOfItem(fridge, item) {
 */
 function getItemFromNewFridge(fridge, item) {
     // Your code here.
+
+    let itemIndex = getIndexOfItem(fridge, item);
+
+    if (itemIndex == -1) {
+        return null;
+    }
+    
+    let itemArray = fridge[itemIndex];
+
+    if (itemArray.length > 1) {
+        let itemToRemove = itemArray.splice(0, 1);
+        return itemToRemove;
+    } else if (itemArray.length === 1) {
+        let itemToRemove = itemArray.splice(0, 1);
+        fridge.splice(itemIndex, 1);
+        return itemToRemove;
+    }
 }
 
 /*
@@ -178,10 +211,22 @@ function getItemFromNewFridge(fridge, item) {
     If there are already similar items in the fridge, add this item to their array.
     Otherwise, create a new array in the fridge and put this item in it.
 */
+
+
 function putItemInNewFridge(fridge, item) {
     // Your code here.
-}
 
+    let itemIndex = getIndexOfItem(fridge, item);
+    let itemArray = fridge[itemIndex];
+
+    if (itemIndex == -1) {
+        let newArray = [];
+        fridge.splice(0, 0, newArray);
+        newArray.splice(0, 0, item);
+    } else {
+        itemArray.splice(0, 0, item);
+    }
+}
 
 /*
    -------END OF YOUR CODE-----------------------------------------------------------
