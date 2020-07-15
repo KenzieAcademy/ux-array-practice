@@ -77,7 +77,8 @@ console.log(myNames);
 let index = 2;
 
 // Your Code Here
-
+myNames[index] = "Ryan";
+console.log(myNames);
 /*
 ---------------------------------------------------------------------------
 Exercise Five - Concatenating an array
@@ -90,3 +91,5 @@ let firstArray = ["This", "will", "make"];
 let secondArray = ["a", "combined", "array."];
 
 // Your Code Here.
+combinedArrays = firstArray.concat(secondArray);
+console.log(combinedArrays);
